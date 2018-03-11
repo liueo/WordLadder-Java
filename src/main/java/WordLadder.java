@@ -3,18 +3,24 @@ import java.lang.*;
 import java.io.*;
 
 public class WordLadder {
+    //words is used to store all words in the input dictionary file.
+    //track is used to store all words that has been in the stack of ladder before.
     public static Set<String> words = new HashSet<String>();
     public static Set<String> track = new HashSet<String>();
 
     public static Stack<String> findLadder(String word1,String word2) {
+        //wordQueue is to store all the stack of partial ladder.
+        //wordStack is to store partial ladder.
         Queue<Stack<String>> wordQueue = new LinkedList<Stack<String>>();
         track.add(word1);
         Stack<String> wordStack = new Stack<String>();
         wordStack.push(word1);
         wordQueue.add(wordStack);
+        //wordS is the top stack of the wordQueue.
         Stack<String> wordS = new Stack<String>();
         while(!wordQueue.isEmpty()) {
             wordS = wordQueue.poll();
+            //word is the top word of the wordS.
             String word = wordS.peek();
             for(int i = 0;i<word.length();i++) {
                 char original_ch = word.charAt(i);
